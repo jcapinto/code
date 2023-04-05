@@ -1,0 +1,100 @@
+import java.time.LocalDate;
+import java.util.Arrays;
+
+public class Chave {
+    private int ano;
+    private int semana;
+    private int[] bolas;
+    private int[] estrelas;
+
+    public Chave() {
+        this.ano = 0;
+        this.semana = 0;
+        this.bolas = new int[5];
+        this.estrelas = new int[2];
+    }
+
+    public Chave(int ano, int semana, int[] bolas, int[] estrelas) {
+        this.ano = ano;
+        this.semana = semana;
+        this.bolas = bolas;
+        this.estrelas = estrelas;
+    }
+
+    public Chave(String linha) {
+        String[] valores = linha.split(" ");
+        if (valores.length != 9) {
+            throw new IllegalArgumentException("Linha inválida: " + linha);
+        }
+        try {
+            this.ano = Integer.parseInt(valores[0]);
+            this.semana = Integer.parseInt(valores[1]);
+            this.bolas = new int[] {
+                    Integer.parseInt(valores[2]),
+                    Integer.parseInt(valores[3]),
+                    Integer.parseInt(valores[4]),
+                    Integer.parseInt(valores[5]),
+                    Integer.parseInt(valores[6])
+            };
+            this.estrelas = new int[] {
+                    Integer.parseInt(valores[7]),
+                    Integer.parseInt(valores[8])
+            };
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Linha inválida: " + linha, e);
+        }
+        if (this.ano < 1980 || this.ano > LocalDate.now().getYear()) {
+            throw new IllegalArgumentException("Ano inválido: " + linha);
+        }
+        if (this.semana < 1 || this.semana > 52) {
+            throw new IllegalArgumentException("Semana inválida: " + linha);
+        }
+        for (int bola : this.bolas) {
+            if (bola < 1 || bola > 50) {
+                throw new IllegalArgumentException("Bola inválida: " + linha);
+            }
+        }
+        for (int estrela : this.estrelas) {
+            if (estrela < 1 || estrela > 12) {
+                throw new IllegalArgumentException("Estrela inválida: " + linha);
+            }
+        }
+    }
+
+    public int getAno() {
+        return this.ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public int getSemana() {
+        return this.semana;
+    }
+
+    public void setSemana(int semana) {
+        this.semana = semana;
+    }
+
+    public int[] getBolas() {
+        return this.bolas;
+    }
+
+    public void setBolas(int[] bolas) {
+        this.bolas = bolas;
+    }
+
+    public int[] getEstrelas() {
+        return this.estrelas;
+    }
+
+    public void setEstrelas(int[] estrelas) {
+        this.estrelas = estrelas;
+    }
+  
+    public String toString() {
+        return this.ano + " " + this.semana + " " + Arrays.toString(this.bolas) + " " + Arrays.toString(this.estrelas);
+    }
+}
+
