@@ -1,96 +1,177 @@
-public class Chave {
-    private int ano;
-    private int semana;
-    private int[] bolas;
-    private int[] estrelas;
+import java.io.File;
+import java.util.Scanner;
 
-    public Chave() {
-        this.ano = 0;
-        this.semana = 0;
-        this.bolas = new int[5];
-        this.estrelas = new int[2];
-    }
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int MAX_CHAVES = 0;
+		Chave[] chaves = new Chave[MAX_CHAVES];
+		int numChavesLidas = 0;
+		boolean ficheiroLido = false;
+		int[] freqAbsBolas = new int[50];
+		int[] freqAbsEstrelas = new int[12];
+		int opcao = 0;
+		do {
+			menuPrincipal();
+			System.out.print("Opcao [0,4]:");
+			opcao = sc.nextInt();
+			sc.nextLine();
+			switch (opcao) {
+			case 1:
+				if (ficheiroLido) System.out.println("\nERRO: O ficheiro já foi lido!\n");
+				else {
+					numChavesLidas = lerFicheiro(sc, chaves);
+					ficheiroLido = true;
+					realizarEstatisticas(chaves, numChavesLidas, freqAbsBolas, freqAbsEstrelas);
+				}
+				break;
+			case 2:
+				if (ficheiroLido) listarChaves(sc, chaves, numChavesLidas);
+				else System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
+				break;
+			case 3:
+				if (ficheiroLido) apresentarEstatisticas(freqAbsBolas, freqAbsEstrelas);
+				else System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
+				break;
+			case 4:
+				if (ficheiroLido) consultaChaves(sc, chaves, numChavesLidas);
+				else System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
+				break;
+			}
+		} while (opcao != 0);
+		sc.close();
+	}
 
-    public Chave(int ano, int semana, int[] bolas, int[] estrelas) {
-        this.ano = ano;
-        this.semana = semana;
-        this.bolas = bolas;
-        this.estrelas = estrelas;
-    }
 
-    public Chave(String linha) {
-        String[] valores = linha.split(" ");
-        if (valores.length != 9) {
-            throw new IllegalArgumentException("Linha inválida: " + linha);
-        }
-        try {
-            this.ano = Integer.parseInt(valores[0]);
-            this.semana = Integer.parseInt(valores[1]);
-            this.bolas = new int[] {
-                    Integer.parseInt(valores[2]),
-                    Integer.parseInt(valores[3]),
-                    Integer.parseInt(valores[4]),
-                    Integer.parseInt(valores[5]),
-                    Integer.parseInt(valores[6])
-            };
-            this.estrelas = new int[] {
-                    Integer.parseInt(valores[7]),
-                    Integer.parseInt(valores[8])
-            };
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Linha inválida: " + linha, e);
-        }
-        if (this.ano < 1980 || this.ano > LocalDate.now().getYear()) {
-            throw new IllegalArgumentException("Ano inválido: " + linha);
-        }
-        if (this.semana < 1 || this.semana > 52) {
-            throw new IllegalArgumentException("Semana inválida: " + linha);
-        }
-        for (int bola : this.bolas) {
-            if (bola < 1 || bola > 50) {
-                throw new IllegalArgumentException("Bola inválida: " + linha);
-            }
-        }
-        for (int estrela : this.estrelas) {
-            if (estrela < 1 || estrela > 12) {
-                throw new IllegalArgumentException("Estrela inválida: " + linha);
-            }
-        }
-    }
 
-    public int getAno() {
-        return this.ano;
-    }
+	private static void realizarEstatisticas(Chave[] chaves, int numChavesLidas, int[] freqAbsBolas,
+			int[] freqAbsEstrelas) {
+		for(int i=0;i<Chave.getNumBolas();i++)freqAbsBolas[i]=0;
+		for(int i=0;i<Chave.getNumEstrelas();i++)freqAbsEstrelas[i]=0;
+		for(int i=0;i<numChavesLidas;i++) {
+			int bola1=chaves[i][Chave.BOLA1];
+			int bola2=chaves[i][Chave.BOLA2];
+			int bola3=chaves[i][Chave.BOLA3];
+			int bola4=chaves[i][Chave.BOLA4];
+			int bola5=chaves[i][Chave.BOLA5];
 
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
+			freqAbsBolas[bola1-1]++;
+			freqAbsBolas[bola2-1]++;
+			freqAbsBolas[bola3-1]++;
+			freqAbsBolas[bola4-1]++;
+			freqAbsBolas[bola5-1]++;
 
-    public int getSemana() {
-        return this.semana;
-    }
+			int estrela1=chaves[i][Chave.ESTRELA1];
+			int estrela2=chaves[i][Chave.ESTRELA1];
 
-    public void setSemana(int semana) {
-        this.semana = semana;
-    }
+			freqAbsEstrelas[estrela1-1]++;
+			freqAbsEstrelas[estrela2-1]++;
 
-    public int[] getBolas() {
-        return this.bolas;
-    }
+		}		
+	}
 
-    public void setBolas(int[] bolas) {
-        this.bolas = bolas;
-    }
 
-    public int[] getEstrelas() {
-        return this.estrelas;
-    }
 
-    public void setEstrelas(int[] estrelas) {
-        this.estrelas = estrelas;
-    }
-  
-    public String toString() {
-        return this.ano + " " + this.semana + " " + Arrays.toString(this.bolas) + " " + Arrays.toString(this.estrelas);
-    }
+	private static void apresentarEstatisticas(int[] freqAbsBolas, int[] freqAbsEstrelas) {
+		for(int i=0;i<Chave.getNumBolas();i++) {
+			System.out.printf(" Bola[%02d]=%d",i+1,freqAbsBolas[i]);
+			if((i+1)%10==0)System.out.println();
+		}
+		System.out.println();
+		for(int i=0;i<Chave.getNumEstrelas();i++) {
+			System.out.printf(" Estrela[%02d]=%d",i+1,freqAbsEstrelas[i]);
+			if((i+1)%6==0)System.out.println();
+		}
+	}
+
+	private static void listarChaves(Scanner sc,Chave[] chaves,int numChavesLidas) {
+		int n=0;
+		for(int i=0;i<numChavesLidas;i++) {
+			System.out.println(formatarChave(chaves,i));
+			n++;
+			if(n==20) {
+				System.out.println("\n\n=> Pressione a tecla ENTER para continuar...\n");
+				sc.nextLine();
+				n=0;
+			}
+		}
+	}
+
+	private static int lerFicheiro(Scanner sc,Chave[] chaves) {
+		String linha,filename;
+		boolean ficheiroAberto;
+		Scanner leitor=null;
+		do{
+			ficheiroAberto=true;
+			System.out.println("Introduza o nome do ficheiro:");
+
+			filename=sc.nextLine();
+			File file=new File(filename);
+			leitor=null;
+			try {
+				leitor = new Scanner(file);
+			} catch (Exception e) {
+				System.out.println("Ficheiro não encontrado");
+				ficheiroAberto=false;
+			}
+		}while(!ficheiroAberto);
+		int i=0;
+		while(leitor.hasNextLine()){
+			linha=leitor.nextLine();
+			Scanner lerLinha=new Scanner(linha);
+			chaves[i][Chave.ANO]=lerLinha.nextInt();
+			chaves[i][Chave.SEMANA]=lerLinha.nextInt();
+			chaves[i][Chave.BOLA1]=lerLinha.nextInt();
+			chaves[i][Chave.BOLA2]=lerLinha.nextInt();
+			chaves[i][Chave.BOLA3]=lerLinha.nextInt();
+			chaves[i][Chave.BOLA4]=lerLinha.nextInt();
+			chaves[i][Chave.BOLA5]=lerLinha.nextInt();
+			chaves[i][Chave.ESTRELA1]=lerLinha.nextInt();
+			chaves[i][Chave.ESTRELA2]=lerLinha.nextInt();					
+			lerLinha.close();
+			i++;
+		}
+		leitor.close();
+		return i;
+	}
+
+	private static void menuPrincipal(){
+		System.out.println("\n1 - Ler Ficheiro");
+		System.out.println("2 - Listar Chaves");
+		System.out.println("3 - Estatisticas");
+		System.out.println("4 - Consulta de chaves");
+		System.out.println("0 - Terminar\n");
+	}
+
+	private static void consultaChaves(Scanner sc, Chave[] chaves, int numChavesLidas) {
+		System.out.println("introduza o ano:");
+		int ano=sc.nextInt();
+		System.out.println("introduza a semana:");
+		int semana=sc.nextInt();
+		boolean encontrou=false;
+		for(int i=0;i<numChavesLidas;i++) {
+			try {
+				try {
+					if(chaves[i][Chave.getAno()]==ano&&chaves[i][Chave.getSemana()]==semana) {
+						System.out.println(formatarChave(chaves,i));
+						encontrou=true;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(!encontrou)System.out.println("Erro: chave inexistente!");
+	}
+
+	private static String formatarChave(Chave[] chaves,int i) {
+		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
+				chaves[i][Chave.ANO],chaves[i][Chave.SEMANA], chaves[i][Chave.BOLA1],chaves[i][Chave.BOLA2],chaves[i][Chave.BOLA3],
+				chaves[i][Chave.BOLA4],chaves[i][Chave.BOLA5],chaves[i][Chave.ESTRELA1],chaves[i][Chave.ESTRELA2]);
+		return tmp;
+	}
 }
