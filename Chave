@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.util.Arrays;
-
 public class Chave {
     private int ano;
     private int semana;
@@ -97,4 +94,3 @@ public class Chave {
         return this.ano + " " + this.semana + " " + Arrays.toString(this.bolas) + " " + Arrays.toString(this.estrelas);
     }
 }
-
