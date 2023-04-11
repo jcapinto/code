@@ -190,14 +190,49 @@ public class Chave {
 		lerLinha.close();
 	}
 	
-	  public static void menuPrincipal() {
-	        System.out.println("\n1 - Ler Ficheiro");
-	        System.out.println("2 - Listar Chaves");
-	        System.out.println("3 - Estatisticas");
-	        System.out.println("4 - Consulta de chaves");
-	        System.out.println("0 - Terminar\n");
+	  public static void menuPrincipal(Scanner ler, int[][] chaves, int numChavesLidas) {
+		  int opcao = 0;
+		    do {
+		        System.out.println("\nMenu Principal");
+		        System.out.println("1 - Ler Ficheiro");
+		        System.out.println("2 - Listar Chaves");
+		        System.out.println("3 - Apresentar Estatísticas");
+		        System.out.println("4 - Consulta Chave");
+		        System.out.println("0 - Sair");
+
+		        System.out.print("\nOpção [0-4]: ");
+		        opcao = ler.nextInt();
+		        ler.nextLine();
+
+		        switch (opcao) {
+		            case 1:
+		            	Chave chave = new Chave(ler, chaves, freqAbsBolas, freqAbsEstrelas);
+		                numChavesLidas = chave.getNumChavesLidas();
+		                break;
+		            case 2:
+		                listarChaves(ler, chaves, numChavesLidas);
+		                break;
+		            case 3:
+		                estatisticas(chaves, numChavesLidas);
+		                break;
+		            case 4:
+		                consultaChave(ler, chaves, numChavesLidas);
+		                break;
+		            case 0:
+		                System.out.println("Programa terminado.");
+		                break;
+		            default:
+		                System.out.println("Opção inválida.");
+		                break;
+		        }
+		    } while (opcao != 0);
 	    }
 	
+	private int getNumChavesLidas() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public String toString() {
 		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
 				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrela[0],estrela[1]);
