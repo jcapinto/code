@@ -123,12 +123,22 @@ public class Chave {
 		int sem=sc.nextInt();
 		boolean encontrou=false;
 		for(int i=0;i<numChavesLidas;i++) {
-			if(chaves[i][ano]==an && chaves[i][semana]==sem) {
+			if(chaves[i].getAno() == an && chaves[i].getSemana() == sem) {
 				System.out.println(chaves[i].toString());
 				encontrou=true;
 			}
 		}
 		if(!encontrou)System.out.println("Erro: chave inexistente!");
+	}
+
+	private int getSemana() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private int getAno() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	public Chave(String linha)
