@@ -89,6 +89,14 @@ public class Chave {
 		lerLinha.close();
 	}
 	
+	  public static void menuPrincipal() {
+	        System.out.println("\n1 - Ler Ficheiro");
+	        System.out.println("2 - Listar Chaves");
+	        System.out.println("3 - Estatisticas");
+	        System.out.println("4 - Consulta de chaves");
+	        System.out.println("0 - Terminar\n");
+	    }
+	
 	public String toString() {
 		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
 				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrela[0],estrela[1]);
