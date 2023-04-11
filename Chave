@@ -1,48 +1,83 @@
+package testePOOtp1;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Chave {
-	public static final int NUM_BOLAS = 50;
-	public static final int NUM_ESTRELAS = 12;
-	private static int ano = 0;
-	private static int semana = 0;
-	static int bolas = 0;
-	static int estrelas = 0;
 
-	public Chave(int ano, int semana, int bolas, int estrelas) {
-		this.ano = ano;
-		this.semana = semana;
-		this.bolas = bolas;
-		this.estrelas = estrelas;
+	public static final int MAX_BOLAS = 50;
+	public static final int NUM_BOLAS = 5;
+	public static final int NUM_ESTRELAS = 2;
+	public static final int MAX_ESTRELAS = 12;
+	private int ano = 0;
+	private int semana = 0;
+	private int[] bolas = new int [NUM_BOLAS];
+	private int[] estrelas = new int [NUM_ESTRELAS];
+
+
+	public Chave() {
+		ano=2020;
+		semana=1;
+		for (int i=0; i<bolas.length; i++)
+			bolas[i]=i+1;
+		estrelas[0]=1;
+		estrelas[1]=2;
 	}
 
-	public static int getAno() {
-		return ano;
-	}
-
-	public static int getSemana() {
+	public Chave(int an, int sem, int bol[], int est[]) throws RuntimeException {
+		ano=an;
+		semana=sem;
 		try {
-			return semana;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			for (int i=0; i<bolas.length; i++)
+				bolas[i]=bol[i];
+			estrelas[0]=est[0];
+			estrelas[1]=est[1];
+		}catch (Exception e) {
+			throw new RuntimeException("ERRO: Numero incorreto de bolas ou estrelas");
 		}
-		return semana;
+
 	}
 
-	public static int getBolas() {
-		return bolas;
+	public Chave(String linha)
+	{
+		//2022 21 2 4 10 30 36 2 7
+		Scanner lerLinha=new Scanner(linha);
+
+		try{
+			ano=lerLinha.nextInt();
+		}catch (InputMismatchException e) {
+			throw new RuntimeException ("tipo de dados invalido no ano");
+		}
+		if (ano<1980||ano>2023) throw new RuntimeException ("ano invalido");
+
+		try{
+			semana=lerLinha.nextInt();
+		}catch (InputMismatchException e) {
+			throw new RuntimeException ("tipo de dados invalido na semana");
+		}
+		if (semana<1||semana>52) throw new RuntimeException ("semana invalida");
+
+		try{
+			bolas=lerLinha.nextInt();
+		}catch (InputMismatchException e) {
+			throw new RuntimeException ("tipo de dados invalido nas bolas");
+		}
+		for (int i=0; i<bolas.length; i++) {
+			bolas[i]=lerLinha.nextInt();		
+			if (bolas[i]<1||bolas[i]>50)
+				throw new RuntimeException ("bola fora do intervalo valido");
+		}
+		estrelas[0]=lerLinha.nextInt();
+		estrelas[1]=lerLinha.nextInt();	
+		//if (estrelas[0]<1||estrelas>52) throw new RuntimeException ("semana invalida");
+		lerLinha.close();
 	}
 
-	public static int getEstrelas() {
-		return estrelas;
+	public String toString() {
+		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
+				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrelas[0],estrelas[1]);
+		return tmp;
 	}
 
-	public int getBolas(int j) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getEstrelas(int j) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }
