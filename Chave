@@ -1,4 +1,6 @@
 public class Chave {
+	public static final int NUM_BOLAS = 50;
+	public static final int NUM_ESTRELAS = 12;
 	private static int ano = 0;
 	private static int semana = 0;
 	static int bolas = 0;
@@ -31,6 +33,16 @@ public class Chave {
 
 	public static int getEstrelas() {
 		return estrelas;
+	}
+
+	public int getBolas(int j) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getEstrelas(int j) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
