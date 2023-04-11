@@ -132,13 +132,11 @@ public class Chave {
 	}
 
 	private int getSemana() {
-		// TODO Auto-generated method stub
-		return 0;
+		return semana;
 	}
 
 	private int getAno() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ano;
 	}
 
 	public Chave(String linha)
