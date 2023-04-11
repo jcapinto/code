@@ -7,7 +7,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-			int[][]chaves=new int[MAXREGISTOS][9];
+			int[][] chvave = new int[MAXREGISTOS][9];
 			int numChavesLidas=0;
 			Scanner sc=new Scanner(System.in);
 			int freqAbsBolas[]=new int[NUMBOLAS];
@@ -20,11 +20,13 @@ public class Main {
 				System.out.print("Opcao [0,4]:");
 				opcao=sc.nextInt();
 				sc.nextLine();
+				Chave chaves;
 				switch(opcao){
 					case 1:
 						if(ficheiroLido)System.out.println("\nERRO: O ficheiro já foi lido!\n");
 						else{
-							numChavesLidas=lerFicheiro(sc,chaves);
+							int[][] chave;
+							numChavesLidas=lerFicheiro(sc,chave);
 							ficheiroLido=true;
 							realizarEstatisticas(chaves,numChavesLidas,freqAbsBolas,freqAbsEstrelas);
 						}						
@@ -114,7 +116,7 @@ public class Main {
 		return tmp;
 	}
 
-	private static void listarChaves(Scanner sc,int [][]chaves,int numChavesLidas) {
+	private static void listarChaves(Scanner sc,Chave chaves,int numChavesLidas) {
 		int n=0;
 		for(int i=0;i<numChavesLidas;i++) {
 			System.out.println(formatarChave(chaves,i));
@@ -127,7 +129,7 @@ public class Main {
 		}
 	}
 //---------------------------------------------------------------------------------------------------------------------
-	private static void realizarEstatisticas(Chave[] chaves, int numChavesLidas, int[] freqAbsBolas, int[] freqAbsEstrelas) {
+	private static void realizarEstatisticas(Chave chaves, int numChavesLidas, int[] freqAbsBolas, int[] freqAbsEstrelas) {
 	    for (int i = 0; i < freqAbsBolas.length; i++) {
 	        freqAbsBolas[i] = 0;
 	    }
@@ -162,7 +164,7 @@ public class Main {
 		}
 	}
 //---------------------------------------------------------------------------------------------------------------------
-	private static void consultaChaves(Scanner sc, int[][] chaves, int numChavesLidas) {
+	private static void consultaChaves(Scanner sc, Chave chaves, int numChavesLidas) {
 		System.out.println("introduza o ano:");
 		int ano=sc.nextInt();
 		System.out.println("introduza a semana:");
