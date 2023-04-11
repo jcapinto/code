@@ -63,6 +63,19 @@ public class Chave {
 		return;
 	}
 	
+	public Chave (Scanner sc, int[][] chaves, int numChavesLidas) {
+	    int n = 0;
+	    for (int i = 0; i < numChavesLidas; i++) {
+	    	System.out.println(chaves[i].toString());
+	        n++;
+	        if (n == 20) {
+	            System.out.println("\n\n=> Pressione a tecla ENTER para continuar...\n");
+	            sc.nextLine();
+	            n = 0;
+	        }
+	    }
+	}
+
 	
 
 	public Chave(int an, int sem, int bol[], int est[]) throws RuntimeException {
