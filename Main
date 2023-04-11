@@ -6,22 +6,27 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner input=new Scanner(System.in);
-		int bol[]={10,20,30,40};
-		int est[]={8,9};
-		String linha = "2020 1 3 4 10 30 36 1 12";
-		Chave aminhachave = new Chave();
-		boolean erro=false;
-		do {
-			erro=false;
-			try {
-				aminhachave = new Chave(linha) ;
-			}catch(RuntimeException e) {
-				erro=true;
-				System.out.println("Houve o erro "+e+" na linha: "+linha + " insira novamente a linha");
-				linha=input.nextLine();
-			}
-		}while (erro);
-		System.out.println(aminhachave);
+		    Chave chave = new Chave();
+		    chave.executar();
+		}
+
+		
+//		int bol[]={10,20,30,40};
+//		int est[]={8,9};
+//		String linha = "2020 1 3 4 10 30 51 1 12";
+//		Chave aminhachave = new Chave();
+//		boolean erro=false;
+//		do {
+//			erro=false;
+//			try {
+//				aminhachave = new Chave(linha) ;
+//			}catch(RuntimeException e) {
+//				erro=true;
+//				System.out.println("Houve o erro "+e+" na linha: "+linha + " insira novamente a linha");
+//				linha=input.nextLine();
+//			}
+//		}while (erro);
+//		System.out.println(aminhachave);
 		input.close();
 
 	}
