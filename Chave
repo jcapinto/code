@@ -1,83 +1,36 @@
 public class Chave {
-	private int[] bolas;
-    private int[] estrelas;
-    private static final int NUMBOLAS = 5;
-    private static final int NUMESTRELAS = 2;
-    private int ano;
-    private int semana;
-    
-    
+	private static int ano = 0;
+	private static int semana = 0;
+	static int bolas = 0;
+	static int estrelas = 0;
 
-    public Chave() {
-        this.ano = 0;
-        this.semana = 0;
-        this.bolas = new int[5];
-        this.estrelas = new int[2];
-    }
+	public Chave(int ano, int semana, int bolas, int estrelas) {
+		this.ano = ano;
+		this.semana = semana;
+		this.bolas = bolas;
+		this.estrelas = estrelas;
+	}
 
-    public Chave(int ano, int semana, int[] bolas, int[] estrelas) {
-        this.ano = ano;
-        this.semana = semana;
-        this.bolas = bolas;
-        this.estrelas = estrelas;
-    }
+	public static int getAno() {
+		return ano;
+	}
 
-    public Chave(int[] numeros, int[] estrelas) {
-        this.bolas = numeros;
-        this.estrelas = estrelas;
-    }
+	public static int getSemana() {
+		try {
+			return semana;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return semana;
+	}
 
-    public void ordenarNumeros() {
-        int n = bolas.length;
-        for (int i = 0; i < n-1; i++) {
-            for (int j = 0; j < n-i-1; j++) {
-                if (bolas[j] > bolas[j+1]) {
-                    int temp = bolas[j];
-                    bolas[j] = bolas[j+1];
-                    bolas[j+1] = temp;
-                }
-            }
-        }
-    }
-    public int getAno() {
-        return this.ano;
-    }
+	public static int getBolas() {
+		return bolas;
+	}
 
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
+	public static int getEstrelas() {
+		return estrelas;
+	}
 
-    public int getSemana() {
-        return this.semana;
-    }
-
-    public void setSemana(int semana) {
-        this.semana = semana;
-    }
-    
-    
-    public int[] getBolas() {
-        return bolas;
-    }
-
-    public void setBolas(int[] bolas) {
-        this.bolas = bolas;
-    }
-
-    public int[] getEstrelas() {
-        return estrelas;
-    }
-
-    public void setEstrelas(int[] estrelas) {
-        this.estrelas = estrelas;
-    }
-
-    public static int getNumBolas() {
-        return NUMBOLAS;
-    }
-
-    public static int getNumEstrelas() {
-        return NUMESTRELAS;
-    }
-
-    }
+}
