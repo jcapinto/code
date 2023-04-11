@@ -12,7 +12,7 @@ public class Chave {
 	private int ano = 0;
 	private int semana = 0;
 	private int[] bolas = new int [NUM_BOLAS];
-	private int[] estrelas = new int [NUM_ESTRELAS];
+	private int[] estrela = new int [NUM_ESTRELAS];
 
 
 	public Chave() {
@@ -20,8 +20,8 @@ public class Chave {
 		semana=1;
 		for (int i=0; i<bolas.length; i++)
 			bolas[i]=i+1;
-		estrelas[0]=1;
-		estrelas[1]=2;
+		estrela[0]=1;
+		estrela[1]=2;
 	}
 
 	public Chave(int an, int sem, int bol[], int est[]) throws RuntimeException {
@@ -30,8 +30,8 @@ public class Chave {
 		try {
 			for (int i=0; i<bolas.length; i++)
 				bolas[i]=bol[i];
-			estrelas[0]=est[0];
-			estrelas[1]=est[1];
+			estrela[0]=est[0];
+			estrela[1]=est[1];
 		}catch (Exception e) {
 			throw new RuntimeException("ERRO: Numero incorreto de bolas ou estrelas");
 		}
@@ -57,25 +57,42 @@ public class Chave {
 		}
 		if (semana<1||semana>52) throw new RuntimeException ("semana invalida");
 
-		try{
-			bolas=lerLinha.nextInt();
-		}catch (InputMismatchException e) {
-			throw new RuntimeException ("tipo de dados invalido nas bolas");
+		try {
+			bolas = new int[lerLinha.nextInt()];
+			for (int i = 0; i < bolas.length; i++) {
+				bolas[i] = lerLinha.nextInt();
+				if (bolas[i] < 1 || bolas[i] > 50) {
+					throw new RuntimeException("bola fora do intervalo valido");
+				}
+			}
+		} catch (InputMismatchException e) {
+			throw new RuntimeException("tipo de dados invalido nas bolas");
 		}
-		for (int i=0; i<bolas.length; i++) {
-			bolas[i]=lerLinha.nextInt();		
-			if (bolas[i]<1||bolas[i]>50)
-				throw new RuntimeException ("bola fora do intervalo valido");
+		try {
+			estrela[0]=lerLinha.nextInt();
+
+		} catch (InputMismatchException e) {
+			throw new RuntimeException("tipo de dados invalido nas estrelas");
 		}
-		estrelas[0]=lerLinha.nextInt();
-		estrelas[1]=lerLinha.nextInt();	
-		//if (estrelas[0]<1||estrelas>52) throw new RuntimeException ("semana invalida");
+		if (estrela[0] < 1 || estrela[0] > 12) {
+			throw new RuntimeException("estrela fora do intervalo valido");
+		}
+
+		try {
+			estrela[1]=lerLinha.nextInt();
+		} catch (InputMismatchException e) {
+			throw new RuntimeException("tipo de dados invalido nas estrelas");
+		}
+		if (estrela[1] < 1 || estrela[1] > 12) {
+			throw new RuntimeException("estrela fora do intervalo valido");
+		}
+
 		lerLinha.close();
 	}
 
 	public String toString() {
 		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
-				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrelas[0],estrelas[1]);
+				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrela[0],estrela[1]);
 		return tmp;
 	}
 
