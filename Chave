@@ -9,6 +9,7 @@ public class Chave {
 	public static final int NUM_BOLAS = 5;
 	public static final int NUM_ESTRELAS = 2;
 	public static final int MAX_ESTRELAS = 12;
+	public static final int MAX_REGISTOS=3000;
 	private int ano = 0;
 	private int semana = 0;
 	private int[] bola = new int [NUM_BOLAS];
