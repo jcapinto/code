@@ -11,13 +11,13 @@ public class Chave {
 	public static final int MAX_ESTRELAS = 12;
 	private int ano = 0;
 	private int semana = 0;
-	private int[] bolas = new int [NUM_BOLAS];
+	private int[] bola = new int [NUM_BOLAS];
 	private int[] estrela = new int [NUM_ESTRELAS];
 
 	public Chave() {
 		this.ano=1980;
 		this.semana=1;
-		for (int i=0; i<bolas.length; i++)bolas[i]=i+1;
+		for (int i=0; i<bola.length; i++)bola[i]=i+1;
 		estrela[0]=1;
 		estrela[1]=2;
 	}	
@@ -25,8 +25,8 @@ public class Chave {
 	public Chave(Chave that) {
 		this.ano=that.ano;
 		this.semana=that.semana;
-		for (int i=0; i<bolas.length; i++)
-			this.bolas[i]=that.bolas[i];
+		for (int i=0; i<bola.length; i++)
+			this.bola[i]=that.bola[i];
 		this.estrela[0]=that.estrela[0];
 		this.estrela[1]=that.estrela[1];
 	}
@@ -47,8 +47,8 @@ public class Chave {
 		ano=an;
 		semana=sem;
 		try {
-			for (int i=0; i<bolas.length; i++)
-				bolas[i]=bol[i];
+			for (int i=0; i<bola.length; i++)
+				bola[i]=bol[i];
 			    estrela[0]=est[0];
 			    estrela[1]=est[1];
 		}catch (Exception e) {
@@ -58,7 +58,7 @@ public class Chave {
 	}
 	public int getBola(int n) throws RuntimeException {
 		if (n<0||n>NUM_BOLAS) throw new RuntimeException("Indici invalido da bola");
-		return bolas[n];
+		return bola[n];
 	}
 
 	public int getEstrela(int n) throws RuntimeException {
@@ -95,7 +95,7 @@ public class Chave {
 		if (bol < 1 || bol > MAX_BOLAS) {
 			throw new RuntimeException("bola fora do intervalo valido");
 		}
-		bolas [idx]=bol;
+		bola [idx]=bol;
 	}
 
 	public void setEstrela (int idx, int est) throws RuntimeException {
@@ -128,7 +128,7 @@ public class Chave {
 			throw new RuntimeException("tipo de dados invalido na semana");
 		}
 
-		for (int i = 0; i < bolas.length; i++) {
+		for (int i = 0; i < bola.length; i++) {
 			try {
 				setBola(i,lerLinha.nextInt());
 			} catch (InputMismatchException e) {
@@ -150,7 +150,7 @@ public class Chave {
 
 	public String toString() {
 		String tmp=String.format("{%d/%02d} |%02d|%02d|%02d|%02d|%02d| |%02d|%02d|",
-				ano, semana, bolas[0],bolas[1],bolas[2],bolas[3],bolas[4],estrela[0],estrela[1]);
+				ano, semana, bola[0],bola[1],bola[2],bola[3],bola[4],estrela[0],estrela[1]);
 		return tmp;
 	}
 
