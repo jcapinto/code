@@ -72,21 +72,21 @@ public class Main {
 				ficheiroAberto=false;
 			}
 		}while(!ficheiroAberto);
-		int i=0;
-		while(leitor.hasNextLine()){
-			linha=leitor.nextLine();
-			Scanner lerLinha=new Scanner(linha);
-			chaves[i][ANO]=lerLinha.nextInt();
-			chaves[i][SEMANA]=lerLinha.nextInt();
-			chaves[i][BOLA1]=lerLinha.nextInt();
-			chaves[i][BOLA2]=lerLinha.nextInt();
-			chaves[i][BOLA3]=lerLinha.nextInt();
-			chaves[i][BOLA4]=lerLinha.nextInt();
-			chaves[i][BOLA5]=lerLinha.nextInt();
-			chaves[i][ESTRELA1]=lerLinha.nextInt();
-			chaves[i][ESTRELA2]=lerLinha.nextInt();					
-			lerLinha.close();
-			i++;
+		int i = 0;
+		while (leitor.hasNextLine()) {
+		    linha = leitor.nextLine();
+		    Scanner lerLinha = new Scanner(linha);
+		    chaves[i][Chave.ano] = lerLinha.nextInt();
+		    chaves[i][Chave.semana] = lerLinha.nextInt();
+		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.estrela1] = lerLinha.nextInt();
+		    chaves[i][Chave.estrela2] = lerLinha.nextInt();					
+		    lerLinha.close();
+		    i++;
 		}
 		leitor.close();
 		return i;
