@@ -24,7 +24,7 @@ public class Main {
 					case 1:
 						if(ficheiroLido)System.out.println("\nERRO: O ficheiro já foi lido!\n");
 						else{
-							numChavesLidas=lerFicheiro(sc,chaves);
+							numChavesLidas=lerFicheiro(sc,chaves,aminhachave);
 							ficheiroLido=true;
 							realizarEstatisticas(chaves,numChavesLidas,freqAbsBolas,freqAbsEstrelas);
 						}						
@@ -54,7 +54,7 @@ public class Main {
 		System.out.println("0 - Terminar\n");
 	}
 //---------------------------------------------------------------------------------------------------------------------
-	private static int lerFicheiro(Scanner sc,int [][]chaves) {
+	private static int lerFicheiro(Scanner sc,int [][]chaves, Chave aminhachave) {
 		String linha, filename;
 		boolean ficheiroAberto;
 		Scanner leitor=null;
@@ -76,15 +76,24 @@ public class Main {
 		while (leitor.hasNextLine()) {
 		    linha = leitor.nextLine();
 		    Scanner lerLinha = new Scanner(linha);
-		    aminhachave.setAno(lerLinha.nextInt());
-		    aminhachave.setSemana(lerLinha.nextInt());
-		    aminhachave.setBola1(lerLinha.nextInt());
-		    aminhachave.setBola2(lerLinha.nextInt());
-		    aminhachave.setBola3(lerLinha.nextInt());
-		    aminhachave.setBola4(lerLinha.nextInt());
-		    aminhachave.setBola5(lerLinha.nextInt());
-		    aminhachave.setEstrela1(lerLinha.nextInt());
-		    aminhachave.setEstrela2(lerLinha.nextInt());
+		    int ano = lerLinha.nextInt();
+		    int semana = lerLinha.nextInt();
+		    int bola1 = lerLinha.nextInt();
+		    int bola2 = lerLinha.nextInt();
+		    int bola3 = lerLinha.nextInt();
+		    int bola4 = lerLinha.nextInt();
+		    int bola5 = lerLinha.nextInt();
+		    int estrela1 = lerLinha.nextInt();
+		    int estrela2 = lerLinha.nextInt();
+		    aminhachave.setAno(ano);
+		    aminhachave.setSemana(semana);
+		    aminhachave.setBola(0, bola1);
+		    aminhachave.setBola(1, bola2);
+		    aminhachave.setBola(2, bola3);
+		    aminhachave.setBola(3, bola4);
+		    aminhachave.setBola(4, bola5);
+		    aminhachave.setEstrela(0, estrela1);
+		    aminhachave.setEstrela(1, estrela2);
 		    lerLinha.close();
 		    i++;
 		}
@@ -106,30 +115,32 @@ public class Main {
 		}
 	}
 //---------------------------------------------------------------------------------------------------------------------
-	private static void realizarEstatisticas(int[][] chaves, int numChavesLidas, int[] freqAbsBolas,
-			int[] freqAbsEstrelas) {
-		for(int i=0;i<Chave.NUM_BOLAS;i++)freqAbsBolas[i]=0;
-		for(int i=0;i<Chave.NUM_ESTRELAS;i++)freqAbsEstrelas[i]=0;
-		for(int i=0;i<numChavesLidas;i++) {
-			int bola1=chaves[i][Chave.Bola1];
-			int bola2=chaves[i][BOLA2];
-			int bola3=chaves[i][BOLA3];
-			int bola4=chaves[i][BOLA4];
-			int bola5=chaves[i][BOLA5];
-			
-			freqAbsBolas[bola1-1]++;
-			freqAbsBolas[bola2-1]++;
-			freqAbsBolas[bola3-1]++;
-			freqAbsBolas[bola4-1]++;
-			freqAbsBolas[bola5-1]++;
-			
-			int estrela1=chaves[i][ESTRELA1];
-			int estrela2=chaves[i][ESTRELA1];
-			
-			freqAbsEstrelas[estrela1-1]++;
-			freqAbsEstrelas[estrela2-1]++;
-			
-		}		
+	private static void realizarEstatisticas(int[][] chaves, int numChavesLidas, int[] freqAbsBolas, int[] freqAbsEstrelas, Chave aminhachave) {
+	    for(int i=0;i<Chave.NUM_BOLAS;i++) freqAbsBolas[i] = 0;
+	    for(int i=0;i<Chave.NUM_ESTRELAS;i++) freqAbsEstrelas[i] = 0;
+	    for(int i=0;i<numChavesLidas;i++) {
+	        int bola1 = chaves[i][Chave.bola1];
+	        int bola2 = chaves[i][Chave.bola2];
+	        int bola3 = chaves[i][Chave.bola3];
+	        int bola4 = chaves[i][Chave.bola4];
+	        int bola5 = chaves[i][Chave.bola5];
+	        freqAbsBolas[bola1-1]++;
+	        freqAbsBolas[bola2-1]++;
+	        freqAbsBolas[bola3-1]++;
+	        freqAbsBolas[bola4-1]++;
+	        freqAbsBolas[bola5-1]++;
+	        int estrela1 = chaves[i][Chave.estrela1];
+	        int estrela2 = chaves[i][Chave.estrela2];
+	        freqAbsEstrelas[estrela1-1]++;
+	        freqAbsEstrelas[estrela2-1]++;
+	        aminhachave.setBola(0, bola1);
+	        aminhachave.setBola(1, bola2);
+	        aminhachave.setBola(2, bola3);
+	        aminhachave.setBola(3, bola4);
+	        aminhachave.setBola(4, bola5);
+	        aminhachave.setEstrela(0, estrela1);
+	        aminhachave.setEstrela(1, estrela2);
+	    }
 	}
 	//---------------------------------------------------------------------------------------------------------------------
 	private static void apresentarEstatisticas(int[] freqAbsBolas, int[] freqAbsEstrelas) {
@@ -144,14 +155,14 @@ public class Main {
 		}
 	}
 //---------------------------------------------------------------------------------------------------------------------
-	private static void consultaChaves(Scanner sc, int[][] chaves, int numChavesLidas) {
+	private static void consultaChaves(Scanner sc, int[][] chaves, int numChavesLidas, Chave aminhachave) {
 		System.out.println("introduza o ano:");
 		int ano=sc.nextInt();
 		System.out.println("introduza a semana:");
 		int semana=sc.nextInt();
 		boolean encontrou=false;
 		for(int i=0;i<numChavesLidas;i++) {
-			if(chaves[i][Chave.getAno]==ano&&chaves[i][Chave.getSemana]==semana) {
+			if(chave.getAno()==ano && chave.getSemana()==semana) {
 				System.out.println(chaves[i]);
 				encontrou=true;
 			}
