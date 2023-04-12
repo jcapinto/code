@@ -1,5 +1,3 @@
-package testePOOtp1;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -58,12 +56,12 @@ public class Chave {
 
 	}
 	public int getBola(int n) throws RuntimeException {
-		if (n<0||n>NUM_BOLAS) throw new RuntimeException("Indici invalido da bola");
+		if (n<0||n>NUM_BOLAS) throw new RuntimeException("Indice invalido da bola");
 		return bola[n];
 	}
 
 	public int getEstrela(int n) throws RuntimeException {
-		if (n<0||n>NUM_ESTRELAS) throw new RuntimeException("Indici invalido da estrela");
+		if (n<0||n>NUM_ESTRELAS) throw new RuntimeException("Indice invalido da estrela");
 		return estrela[n];
 	}
 
@@ -76,14 +74,14 @@ public class Chave {
 	}
 
 	public void setSemana(int sem) throws RuntimeException {
-		this.semana=sem;
+		semana=sem;
 		if (semana < 1 || semana > 52) {
 			throw new RuntimeException("semana invalida");
 		}
 	}
 
 	public void setAno(int an) throws RuntimeException {
-		this.ano=an;
+		ano=an;
 		if (ano < 1980 || ano > 2023) {
 			throw new RuntimeException("ano invalido");
 		}
@@ -96,7 +94,7 @@ public class Chave {
 		if (bol < 1 || bol > MAX_BOLAS) {
 			throw new RuntimeException("bola fora do intervalo valido");
 		}
-		this.bola [idx]=bol;
+		bola [idx]=bol;
 	}
 
 	public void setEstrela (int idx, int est) throws RuntimeException {
@@ -106,7 +104,7 @@ public class Chave {
 		if (est < 1 || est > MAX_ESTRELAS) {
 			throw new RuntimeException("estrela fora do intervalo valido");
 		}
-		this.estrela [idx]=est;
+		estrela [idx]=est;
 	}
 
 
