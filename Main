@@ -78,14 +78,13 @@ public class Main {
 		    Scanner lerLinha = new Scanner(linha);
 		    aminhachave.setAno(lerLinha.nextInt());
 		    aminhachave.setSemana(lerLinha.nextInt());
-		    aminhachave.setBola(0, lerLinha.nextInt());
-		    aminhachave.setBola(1, lerLinha.nextInt());
-		    aminhachave.setBola(2, lerLinha.nextInt());
-		    aminhachave.setBola(3, lerLinha.nextInt());
-		    aminhachave.setBola(4, lerLinha.nextInt());
-		    aminhachave.setBola(5, lerLinha.nextInt());
-		    aminhachave.setEstrela(0, lerLinha.nextInt());
-		    aminhachave.setEstrela(1, lerLinha.nextInt());
+		    aminhachave.setBola1(lerLinha.nextInt());
+		    aminhachave.setBola2(lerLinha.nextInt());
+		    aminhachave.setBola3(lerLinha.nextInt());
+		    aminhachave.setBola4(lerLinha.nextInt());
+		    aminhachave.setBola5(lerLinha.nextInt());
+		    aminhachave.setEstrela1(lerLinha.nextInt());
+		    aminhachave.setEstrela2(lerLinha.nextInt());
 		    lerLinha.close();
 		    i++;
 		}
@@ -160,4 +159,3 @@ public class Main {
 		if(!encontrou)System.out.println("Erro: chave inexistente!");
 	}
 }
-
