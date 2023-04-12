@@ -76,15 +76,16 @@ public class Main {
 		while (leitor.hasNextLine()) {
 		    linha = leitor.nextLine();
 		    Scanner lerLinha = new Scanner(linha);
-		    chaves[i][Chave.ano] = lerLinha.nextInt();
-		    chaves[i][Chave.semana] = lerLinha.nextInt();
-		    chaves[i][Chave.bola1] = lerLinha.nextInt();
-		    chaves[i][Chave.bola2] = lerLinha.nextInt();
-		    chaves[i][Chave.bola3] = lerLinha.nextInt();
-		    chaves[i][Chave.bola4] = lerLinha.nextInt();
-		    chaves[i][Chave.bola5] = lerLinha.nextInt();
-		    chaves[i][Chave.estrela1] = lerLinha.nextInt();
-		    chaves[i][Chave.estrela2] = lerLinha.nextInt();					
+		    aminhachave.getAno() = lerLinha.nextInt();
+		    aminhachave.getSemana() = lerLinha.nextInt();
+		    aminhachave.getBola[0] = lerLinha.nextInt();
+		    aminhachave.getBola[1] = lerLinha.nextInt();
+		    aminhachave.getBola[2] = lerLinha.nextInt();
+		    aminhachave.getBola[3]  = lerLinha.nextInt();
+		    aminhachave.getBola[4] = lerLinha.nextInt();
+		    aminhachave.getBola[5]  = lerLinha.nextInt();
+		    aminhachave.getEstrela[1]   = lerLinha.nextInt();
+		    aminhachave.getEstrela[2]   = lerLinha.nextInt();
 		    lerLinha.close();
 		    i++;
 		}
