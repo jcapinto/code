@@ -1,51 +1,48 @@
-package testePOOtp1;
-
 import java.io.File;
 import java.util.Scanner;
 
 public class Main {
-	
+
 	public static void main(String[] args) {
-		    Chave aminhachave = new Chave();
-			int[][]chaves=new int[Chave.MAX_REGISTOS][9];
-			int numChavesLidas=0;
-			Scanner sc=new Scanner(System.in);
-			int freqAbsBolas[]=new int[Chave.NUM_BOLAS];
-			int freqAbsEstrelas[]=new int[Chave.NUM_ESTRELAS];
-			boolean ficheiroLido=false;
-		
-			int opcao=0;		
-			do{
-				menuPrincipal();
-				System.out.print("Opcao [0,4]:");
-				opcao=sc.nextInt();
-				sc.nextLine();
-				switch(opcao){
-					case 1:
-						if(ficheiroLido)System.out.println("\nERRO: O ficheiro já foi lido!\n");
-						else{
-							numChavesLidas=lerFicheiro(sc,chaves,aminhachave);
-							ficheiroLido=true;
-							realizarEstatisticas(chaves,numChavesLidas,freqAbsBolas,freqAbsEstrelas);
-						}						
-						break;
-					case 2:
-						if(ficheiroLido)listarChaves(sc,chaves,numChavesLidas);
-						else System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
-						break;
-					case 3:
-						if(ficheiroLido)apresentarEstatisticas(freqAbsBolas,freqAbsEstrelas);
-						else  System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");					
-						break;
-					case 4:
-						if(ficheiroLido)consultaChaves(sc,chaves,numChavesLidas);
-						else  System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
-						break;
-				}
-			}while(opcao!=0);
-			sc.close();
+		Chave []chaves=new Chave[Chave.MAX_REGISTOS];
+		int numChavesLidas=0;
+		Scanner sc=new Scanner(System.in);
+		int freqAbsBolas[]=new int[Chave.NUM_BOLAS];
+		int freqAbsEstrelas[]=new int[Chave.NUM_ESTRELAS];
+		boolean ficheiroLido=false;
+
+		int opcao=0;		
+		do{
+			menuPrincipal();
+			System.out.print("Opcao [0,4]:");
+			opcao=sc.nextInt();
+			sc.nextLine();
+			switch(opcao){
+			case 1:
+				if(ficheiroLido)System.out.println("\nERRO: O ficheiro já foi lido!\n");
+				else{
+					numChavesLidas=lerFicheiro(sc,chaves);
+					ficheiroLido=true;
+					realizarEstatisticas(chaves,numChavesLidas,freqAbsBolas,freqAbsEstrelas);
+				}						
+				break;
+			case 2:
+				if(ficheiroLido)listarChaves(sc,chaves,numChavesLidas);
+				else System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
+				break;
+			case 3:
+				if(ficheiroLido)apresentarEstatisticas(freqAbsBolas,freqAbsEstrelas);
+				else  System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");					
+				break;
+			case 4:
+				if(ficheiroLido)consultaChaves(sc,chaves,numChavesLidas);
+				else  System.out.println("\nERRO: O ficheiro ainda não foi lido!\n");
+				break;
+			}
+		}while(opcao!=0);
+		sc.close();
 	}
-//---------------------------------------------------------------------------------------------------------------------	
+	//---------------------------------------------------------------------------------------------------------------------	
 	private static void menuPrincipal(){
 		System.out.println("\n1 - Ler Ficheiro");
 		System.out.println("2 - Listar Chaves");
@@ -53,15 +50,15 @@ public class Main {
 		System.out.println("4 - Consulta de chaves");
 		System.out.println("0 - Terminar\n");
 	}
-//---------------------------------------------------------------------------------------------------------------------
-	private static int lerFicheiro(Scanner sc,int [][]chaves, Chave aminhachave) {
-		String linha, filename;
+	//---------------------------------------------------------------------------------------------------------------------
+	private static int lerFicheiro(Scanner sc,Chave []chaves) {
+		String linha,filename;
 		boolean ficheiroAberto;
 		Scanner leitor=null;
 		do{
 			ficheiroAberto=true;
 			System.out.println("Introduza o nome do ficheiro:");
-		
+
 			filename=sc.nextLine();
 			File file=new File(filename);
 			leitor=null;
@@ -72,37 +69,20 @@ public class Main {
 				ficheiroAberto=false;
 			}
 		}while(!ficheiroAberto);
-		int i = 0;
-		while (leitor.hasNextLine()) {
-		    linha = leitor.nextLine();
-		    Scanner lerLinha = new Scanner(linha);
-		    int ano = lerLinha.nextInt();
-		    int semana = lerLinha.nextInt();
-		    int bola1 = lerLinha.nextInt();
-		    int bola2 = lerLinha.nextInt();
-		    int bola3 = lerLinha.nextInt();
-		    int bola4 = lerLinha.nextInt();
-		    int bola5 = lerLinha.nextInt();
-		    int estrela1 = lerLinha.nextInt();
-		    int estrela2 = lerLinha.nextInt();
-		    aminhachave.setAno(ano);
-		    aminhachave.setSemana(semana);
-		    aminhachave.setBola(0, bola1);
-		    aminhachave.setBola(1, bola2);
-		    aminhachave.setBola(2, bola3);
-		    aminhachave.setBola(3, bola4);
-		    aminhachave.setBola(4, bola5);
-		    aminhachave.setEstrela(0, estrela1);
-		    aminhachave.setEstrela(1, estrela2);
-		    lerLinha.close();
-		    i++;
+		int i=0;
+		while(leitor.hasNextLine()){
+
+			linha=leitor.nextLine();
+			//aletar
+			chaves[i]=new Chave(linha);
+
+			i++;
 		}
 		leitor.close();
 		return i;
 	}
-//---------------------------------------------------------------------------------------------------------------------	
-//---------------------------------------------------------------------------------------------------------------------	
-	private static void listarChaves(Scanner sc,int [][]chaves,int numChavesLidas) {
+	
+	private static void listarChaves(Scanner sc,Chave []chaves,int numChavesLidas) {
 		int n=0;
 		for(int i=0;i<numChavesLidas;i++) {
 			System.out.println(chaves[i]);
@@ -114,33 +94,31 @@ public class Main {
 			}
 		}
 	}
-//---------------------------------------------------------------------------------------------------------------------
-	private static void realizarEstatisticas(int[][] chaves, int numChavesLidas, int[] freqAbsBolas, int[] freqAbsEstrelas, Chave aminhachave) {
-	    for(int i=0;i<Chave.NUM_BOLAS;i++) freqAbsBolas[i] = 0;
-	    for(int i=0;i<Chave.NUM_ESTRELAS;i++) freqAbsEstrelas[i] = 0;
-	    for(int i=0;i<numChavesLidas;i++) {
-	        int bola1 = chaves[i][Chave.bola1];
-	        int bola2 = chaves[i][Chave.bola2];
-	        int bola3 = chaves[i][Chave.bola3];
-	        int bola4 = chaves[i][Chave.bola4];
-	        int bola5 = chaves[i][Chave.bola5];
-	        freqAbsBolas[bola1-1]++;
-	        freqAbsBolas[bola2-1]++;
-	        freqAbsBolas[bola3-1]++;
-	        freqAbsBolas[bola4-1]++;
-	        freqAbsBolas[bola5-1]++;
-	        int estrela1 = chaves[i][Chave.estrela1];
-	        int estrela2 = chaves[i][Chave.estrela2];
-	        freqAbsEstrelas[estrela1-1]++;
-	        freqAbsEstrelas[estrela2-1]++;
-	        aminhachave.setBola(0, bola1);
-	        aminhachave.setBola(1, bola2);
-	        aminhachave.setBola(2, bola3);
-	        aminhachave.setBola(3, bola4);
-	        aminhachave.setBola(4, bola5);
-	        aminhachave.setEstrela(0, estrela1);
-	        aminhachave.setEstrela(1, estrela2);
-	    }
+	//---------------------------------------------------------------------------------------------------------------------
+	private static void realizarEstatisticas(Chave [] chaves, int numChavesLidas, int[] freqAbsBolas,
+			int[] freqAbsEstrelas) {
+		for(int i=0;i<Chave.NUM_BOLAS;i++)freqAbsBolas[i]=0;
+		for(int i=0;i<Chave.NUM_ESTRELAS;i++)freqAbsEstrelas[i]=0;
+		for(int i=0;i<numChavesLidas;i++) {
+			int bola1=chaves[i].getBola(0);
+			int bola2=chaves[i].getBola(1);
+			int bola3=chaves[i].getBola(2);
+			int bola4=chaves[i].getBola(3);
+			int bola5=chaves[i].getBola(4);
+
+			freqAbsBolas[bola1-1]++;
+			freqAbsBolas[bola2-1]++;
+			freqAbsBolas[bola3-1]++;
+			freqAbsBolas[bola4-1]++;
+			freqAbsBolas[bola5-1]++;
+
+			int estrela1=chaves[i].getEstrela(0);
+			int estrela2=chaves[i].getEstrela(1);
+
+			freqAbsEstrelas[estrela1-1]++;
+			freqAbsEstrelas[estrela2-1]++;
+
+		}		
 	}
 	//---------------------------------------------------------------------------------------------------------------------
 	private static void apresentarEstatisticas(int[] freqAbsBolas, int[] freqAbsEstrelas) {
@@ -154,16 +132,16 @@ public class Main {
 			if((i+1)%6==0)System.out.println();
 		}
 	}
-//---------------------------------------------------------------------------------------------------------------------
-	private static void consultaChaves(Scanner sc, int[][] chaves, int numChavesLidas, Chave aminhachave) {
+	//---------------------------------------------------------------------------------------------------------------------
+	private static void consultaChaves(Scanner sc, Chave [] chaves, int numChavesLidas) {
 		System.out.println("introduza o ano:");
 		int ano=sc.nextInt();
 		System.out.println("introduza a semana:");
 		int semana=sc.nextInt();
 		boolean encontrou=false;
 		for(int i=0;i<numChavesLidas;i++) {
-			if(chave.getAno()==ano && chave.getSemana()==semana) {
-				System.out.println(chaves[i]);
+			if(chaves[i].getAno()==ano&&chaves[i].getSemana()==semana) {
+				System.out.println(chaves [i]);
 				encontrou=true;
 			}
 		}
