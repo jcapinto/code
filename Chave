@@ -76,14 +76,14 @@ public class Chave {
 	}
 
 	public void setSemana(int sem) throws RuntimeException {
-		semana=sem;
+		this.semana=sem;
 		if (semana < 1 || semana > 52) {
 			throw new RuntimeException("semana invalida");
 		}
 	}
 
 	public void setAno(int an) throws RuntimeException {
-		ano=an;
+		this.ano=an;
 		if (ano < 1980 || ano > 2023) {
 			throw new RuntimeException("ano invalido");
 		}
@@ -96,7 +96,7 @@ public class Chave {
 		if (bol < 1 || bol > MAX_BOLAS) {
 			throw new RuntimeException("bola fora do intervalo valido");
 		}
-		bola [idx]=bol;
+		this.bola [idx]=bol;
 	}
 
 	public void setEstrela (int idx, int est) throws RuntimeException {
@@ -106,7 +106,7 @@ public class Chave {
 		if (est < 1 || est > MAX_ESTRELAS) {
 			throw new RuntimeException("estrela fora do intervalo valido");
 		}
-		estrela [idx]=est;
+		this.estrela [idx]=est;
 	}
 
 
