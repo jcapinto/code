@@ -4,11 +4,10 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Main {
-	public static final int MAXREGISTOS=3000;
-
+	
 	public static void main(String[] args) {
 		    Chave aminhachave = new Chave();
-			int[][]chaves=new int[MAXREGISTOS][9];
+			int[][]chaves=new int[Chave.MAX_REGISTOS][9];
 			int numChavesLidas=0;
 			Scanner sc=new Scanner(System.in);
 			int freqAbsBolas[]=new int[Chave.NUM_BOLAS];
