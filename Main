@@ -79,10 +79,10 @@ public class Main {
 		    chaves[i][Chave.ano] = lerLinha.nextInt();
 		    chaves[i][Chave.semana] = lerLinha.nextInt();
 		    chaves[i][Chave.bola1] = lerLinha.nextInt();
-		    chaves[i][Chave.bola1] = lerLinha.nextInt();
-		    chaves[i][Chave.bola1] = lerLinha.nextInt();
-		    chaves[i][Chave.bola1] = lerLinha.nextInt();
-		    chaves[i][Chave.bola1] = lerLinha.nextInt();
+		    chaves[i][Chave.bola2] = lerLinha.nextInt();
+		    chaves[i][Chave.bola3] = lerLinha.nextInt();
+		    chaves[i][Chave.bola4] = lerLinha.nextInt();
+		    chaves[i][Chave.bola5] = lerLinha.nextInt();
 		    chaves[i][Chave.estrela1] = lerLinha.nextInt();
 		    chaves[i][Chave.estrela2] = lerLinha.nextInt();					
 		    lerLinha.close();
