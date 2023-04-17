@@ -81,7 +81,7 @@ public class Main {
 		            System.out.println("Insira a correção a fazer em " + linha);
 		            sc.nextLine(); // aguarda correção
 				}
-				i++;
+				
 		}
 		leitor.close();
 		return i;
