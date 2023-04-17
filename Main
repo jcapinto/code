@@ -74,11 +74,15 @@ public class Main {
 		while(leitor.hasNextLine()){
 			
 			linha=leitor.nextLine();
-			//alterar aqui adicionar um metudo try/ctach que ao abrir o erro.txt informe que linha tem erro
-			//e atraves de um System.out.println("introduza a linha com os parametros corretos")
-			chaves[i]=new Chave(linha);
-			
-			i++;
+			try {
+				chaves[i] = new Chave(linha);
+				} catch (RuntimeException e) {
+				System.out.println("Erro na linha " + (i+1) + ". Tipo de dado inválido em " + e.getMessage());
+				System.out.print("Insira a correção a fazer em " + e.getMessage() + ": ");
+				String correcao = sc.nextLine();
+				chaves[i] = new Chave(correcao);
+				}
+				i++;
 		}
 		leitor.close();
 		return i;
