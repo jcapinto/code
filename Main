@@ -77,10 +77,9 @@ public class Main {
 			try {
 				chaves[i] = new Chave(linha);
 				} catch (RuntimeException e) {
-				System.out.println("Erro na linha " + (i+1) + ". Tipo de dado inválido em " + e.getMessage());
-				System.out.print("Insira a correção a fazer em " + e.getMessage() + ": ");
-				String correcao = sc.nextLine();
-				chaves[i] = new Chave(correcao);
+					System.out.println("Erro na linha " + (i + 1) + ": " + e.getMessage());
+		            System.out.println("Insira a correção a fazer em " + linha);
+		            sc.nextLine(); // aguarda correção
 				}
 				i++;
 		}
