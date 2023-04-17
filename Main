@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -51,7 +52,7 @@ public class Main {
 		System.out.println("0 - Terminar\n");
 	}
 	//---------------------------------------------------------------------------------------------------------------------
-	private static int lerFicheiro(Scanner sc,Chave []chaves) {
+	private static int lerFicheiro(Scanner sc,Chave []chaves) throws RuntimeException {
 		String linha,filename;
 		boolean ficheiroAberto;
 		Scanner leitor=null;
@@ -71,11 +72,20 @@ public class Main {
 		}while(!ficheiroAberto);
 		int i=0;
 		while(leitor.hasNextLine()){
-
-			linha=leitor.nextLine();
-			//aletar
+			
+			linha=leitor.nextLine(); throws RuntimeException {
+				try {
+					setAno(linha.nextInt());
+					setSemana(linha.nextInt());
+					setBola(i,Linha.nextInt());
+					setEstrela(i,Linha.nextInt());
+				}catch (InputMismatchException e){
+					throw new RuntimeException("tipo de dados invalido em" + e);
+				}			
+	
+			System.out.println("Insira a correção a fazer em "+ e);
+			}
 			chaves[i]=new Chave(linha);
-
 			i++;
 		}
 		leitor.close();
