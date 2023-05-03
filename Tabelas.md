@@ -1,5 +1,3 @@
-Este modelo é composto por:
-
 TipoCliente (CodTipoCliente (PK), Descrição);
 Cliente (IdCliente (PK), nome, morada, telemóvel, e-mail, CodTipoCliente (FK));
 Serviço (CodServiço(PK), dataRequisição, dataExecução, horaInicio, horaFim, preçoHora, IdCliente (FK), CodViatura(FK));
@@ -15,117 +13,126 @@ AtividadeFuncionario (CodAtividade (PK) (FK), IdFuncionario (PK) (FK), tempoGast
 AtividadeTarefa (CodAtividade (PK) (FK), CodTarefa (FK), preço total)
 ServicoTipoServico (CodServiço (PK) (FK), CodTipoServiço (FK))
 
-4.4.1	Modelo de Dados
-Nas seguintes tabelas apresentamos todas as tabelas que iremos criar em SQL, bem como o tipo de dados, uma descrição e as respetivas restrições.
+
+
+
+
+
 
 Tabela: TipoCliente 
-Campo	Tipo de dados	Descrição	Observações
-CodTipoCliente	INT	‘individuais’, ‘empresas’, ‘associações’	Chave primária, não admite o valor NULL
-Descrição	Varchar (100)	Descrever o tipo de cliente	Não admite valor NULL
+Campo	Tipo de dados
+CodTipoCliente	INT
+Descrição	Varchar (100)
 
 Tabela: Cliente 
-Campo	Tipo de dados	Descrição	Observações
-IdCliente	INT	Identificador único do cliente	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Identificador do nome do cliente	Não admite valor NULL
-Morada	Varchar(100)	Morada do cliente	
+Campo	Tipo de dados
+IdCliente	INT
+Nome	Varchar (30)
+Morada	Varchar(100)
 Telemóvel	INT
-	Número de telemóvel do cliente (9 dígitos)	
-E-mail	Varchar (40)	E-mail do cliente	Não admite valor NULL
-CodTipoCliente	INT	‘individuais’, ‘empresas’, ‘associações’	Chave forasteira
+
+E-mail	Varchar (40)
+CodTipoCliente	INT
+
 
 Tabela: TipoServiço 
-Campo	Tipo de dados	Descrição	Observações
-codTipoServiço	INT	Identificador único do tipo de serviço	Chave primária, não admite o valor NULL, único
-Descrição	Varchar (100)	Descrição do tipo de serviço efetuado	Preenchimento opcional
+Campo	Tipo de dados
+codTipoServiço	INT
+Descrição	Varchar (100)
 Taxa	decimal
-	Taxa aplicada a cada serviço	Tabelada
+
+
+
 
 Tabela: Serviço 
-Campo	Tipo de dados	Descrição	Observações
-CodServiço	INT	Identificador único do Serviço	Chave primária, não admite o valor NULL, único
-DataRequisição	Date	Data em que a requisição foi feita	Não admite valor NULL
+Campo	Tipo de dados
+CodServiço	INT
+DataRequisição	Date
 DataExecução	Date
-	Data em que a execução foi feita	Não admite valor NULL
-HoraInicio	Time	Hora em que o serviço foi iniciado	Não admite valor NULL
-HoraFim	Time	Hora em que o serviço foi terminado	Não admite valor NULL
-PreçoHora	money	Preços tabelados	Não admite valor NULL
+
+HoraInicio	Time
+HoraFim	Time
+PreçoHora	money
 IdCliente	INT
-	Identificador único do cliente	Chave forasteira
-CodViatura	INT	Identificador único da viatura	Chave forasteira
+
+CodViatura	INT
 
 Tabela: Viatura 
-Campo	Tipo de dados	Descrição	Observações
-CodViatura	INT	Identificador único da viatura	Chave primária, não admite o valor NULL, único
-Matrícula	Varchar (30)	Identificador da matrícula	Não admite valor NULL
-Marca	Varchar (30)	Identificador da marca	Não admite valor NULL
-Modelo	Varchar (20)	Identificador do modelo	Não admite valor NULL
-Cor	Varchar (20)	Identificador da cor	
-Ano	Data	Identificador do ano	
+Campo	Tipo de dados
+CodViatura	INT
+Matrícula	Varchar (30)
+Marca	Varchar (30)
+Modelo	Varchar (20)
+Cor	Varchar (20)
+Ano	Data
 
 Tabela: Tarefa 
-Campo	Tipo de dados	Descrição	Observações
-CodTarefa	INT	Código da tarefa	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Data da realização da atividade	Não admite valor NULL
-PreçoHora	Money	Identificador da cor	Default 50
+Campo	Tipo de dados
+CodTarefa	INT
+Nome	Varchar (30)
+PreçoHora	Money
+
 
 Tabela: Atividade 
-Campo	Tipo de dados	Descrição	Observações
-CodAtividade	INT	Código da atividade	Chave primária, não admite o valor NULL, único
-DataAtv	Date	Data da realização da atividade	Não admite valor NULL
-HoraInicio	Time	Hora de início da tarefa	Não admite valor NULL
-HoraFim	Time	Hora do fim da tarefa	Não admite valor NULL
-Preço	Money	Identificador da cor	Default 50
-CodTarefa	INT	Identificador da tarefa	Chave forasteira
+Campo	Tipo de dados
+CodAtividade	INT
+DataAtv	Date
+HoraInicio	Time
+HoraFim	Time
+Preço	Money
+CodTarefa	INT
 
 Tabela: FuncionárioResponsável 
-Campo	Tipo de dados	Descrição	Observações
-IdFuncionarioResponsavel	INT	Identificação do func. responsável	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Nome do responsável	Não admite valor NULL
-Morada	Varchar (30)	Morada do responsável	Não admite valor NULL
-Telemóvel	int	Telemóvel do responsável	Não admite valor NULL
-E-mail	Varchar (30)	E-mail do responsável	Não admite valor NULL
-Salário	money	Salário do responsável	
-DataNascimento	Data	Data de nascimento do funcionário responsável	Não admite valor NULL
+Campo	Tipo de dados
+IdFuncionarioResponsavel	INT
+Nome	Varchar (30)
+Morada	Varchar (30)
+Telemóvel	int
+E-mail	Varchar (30)
+Salário	money
+DataNascimento	Data
 
 Tabela: Funcionário 
-Campo	Tipo de dados	Descrição	Observações
-IdFuncionario	INT	Identificação do funcionário	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Nome do funcionário	Não admite valor NULL
-Morada	Varchar (30)	Morada do funcionário	Não admite valor NULL
-Telemóvel	int	Telemóvel do funcionário	Não admite valor NULL
-E-mail	Varchar (30)	E-mail do funcionário	Não admite valor NULL
-Salário	money	Salário do funcionário	
-DataNascimento	Data	Data de nascimento do funcionário 	Não admite valor NULL
-IdFuncionarioResponsável	INT	Identificação do funcionário responsável	Chave Forasteira
+Campo	Tipo de dados
+IdFuncionario	INT
+Nome	Varchar (30)
+Morada	Varchar (30)
+Telemóvel	int
+E-mail	Varchar (30)
+Salário	money
+DataNascimento	Data
+IdFuncionarioResponsável	INT
 
 Tabela: Máquina 
-Campo	Tipo de dados	Descrição	Observações
-CodMaquina	INT	Código da máquina	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Nome da máquina	Não admite valor NULL
-CustoHora	Money	Preço que a máquina custa há hora	Default 50
+Campo	Tipo de dados
+CodMaquina	INT
+Nome	Varchar (30)
+CustoHora	Money
+
+
 
 Tabela: Produto 
-Campo	Tipo de dados	Descrição	Observações
-CodProduto	INT	Identificação do produto	Chave primária, não admite o valor NULL, único
-Nome	Varchar (30)	Nome do produto	Não admite valor NULL
-Descrição	Varchar (100)	Descrição do produto	
-Quantidade	int	Quantidade de produto usado	Não admite valor NULL
-PreçoUnitário	Money	Preço individual de cada produto	Não admite valor NULL
-CodAtividade	INT	Identificação da atividade	Chave Forasteira
+Campo	Tipo de dados
+CodProduto	INT
+Nome	Varchar (30)
+Descrição	Varchar (100)
+Quantidade	int
+PreçoUnitário	Money
+CodAtividade	INT
 
 Tabela: AtividadeFuncionário 
-Campo	Tipo de dados	Descrição	Observações
-CodAtividade	INT	Código da atividade	Chave Primária e Forasteira, não admite o valor NULL.
-IdFuncionário	INT	Código do funcionário	Chave primária e chave forasteira
-TempoGasto	Time	Tempo gasto por cada funcionário em cada atividade	Não admite valor NULL
+Campo	Tipo de dados
+CodAtividade	INT
+IdFuncionário	INT
+TempoGasto	Time
 
 Tabela: AtividadeTarefa 
-Campo	Tipo de dados	Descrição	Observações
-CodAtividade	INT	Código da atividade	Chave Primária e Forasteira, não admite o valor NULL.
-CodTarefa	INT	Código da tarefa	Chave forasteira
-Preço total	Money	Preço total de uma tarefa que pertence a uma atividade	Não admite valor NULL
+Campo	Tipo de dados
+CodAtividade	INT
+CodTarefa	INT
+Preço total	Money
 
 Tabela: ServicoTipoServico 
-Campo	Tipo de dados	Descrição	Observações
-CodServiço	INT	Código do serviço	Chave Primária e Forasteira, não admite o valor NULL.
-CodTipoServiço	INT	Código do tipo de serviço	Chave forasteira
+Campo	Tipo de dados
+CodServiço	INT
+CodTipoServiço	INT
