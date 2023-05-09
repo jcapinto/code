@@ -1,0 +1,50 @@
+Nesta versão do jogo o tabuleiro é constituído por nove grelhas, cada uma disposta numa posição de
+um tabuleiro com 9 divisões (em 3x3).
+
+Na primeira jogada todas as grelhas estão ativas e o jogador é livre de escolher em que posição, de
+uma das nove grelhas, quer jogar:
+
+A partir daí, a posição da jogada vai influenciar em qual grelha o jogador seguinte poderá jogar.
+Por exemplo, se o primeiro jogador escolher a 2ª linha da 1ª coluna todas as grelhas serão
+desativadas com exceção daquela que se encontra, exatamente, na 2ª linha da 1ª coluna do
+tabuleiro:
+
+Por seu lado, neste exemplo, o jogador, com o símbolo O, escolheu jogar na 1ª linha da 2ª coluna, o
+que fez ativar a grelha que encontra nessa mesma posição no tabuleiro.
+
+Este jogo não termina quando um jogador faz uma linha, ao contrário do jogo tradicional,
+simplesmente conta mais um ponto:
+
+Um jogador terá assim tantos pontos quantas sequências tiver de 3 simbolos em linha (horizontal,
+vertical ou diagonal).
+A condição de final do jogo será quando for escolhida uma grelha completa que não permite ao
+jogador efetuar uma jogada:
+
+Trabalho a Desenvolver
+Já é fornecido código com a estrutura de classes e muito código “importado” do jogo do galo
+tradicional desenvolvido em sala de aula.
+No entanto, algumas das classe necessitam ser concluidas, assim sendo o objetivo deste trabalho é
+concluir o jogo e como tal é necessário implementar o seguinte:
+
+Classe Posicao
+- definir atributos
+- implementar construtor, getters e setters
+- não é necessário proteger/validar os valores recebidos pelos setters!
+
+Classe Grelha
+- executar() - em vez de retornar um boolean com o sucesso (ou insucesso) do click retornar a
+posição, linha e coluna, para ativar a grelha correta no tabuleiro e desativas as outras
+- ativar() - marcar esta grelha como ativa e ativar cada uma das suas casas
+- desativar() - igual à função anterior mas a marcar esta grelha como inativa e desativar cada
+uma das suas casas
+- vitoria() - em vez de retornar simplesmente se houve vitoria ou não, esta função tem agora
+que retornar QUANTAS linhas encontrou com o simbolo em questão
+
+Classe Jogo
+- executar() - registar qual é a grelha ativa e calcular os pontos de cada jogador
+- fimJogo() - verificar se a grelha escolhida tem jogadas livres ou não
+- selecionar() - ativar a grelha escolhida e desativar as outras
+
+ATENÇÃO – não é necessário, nem permitido, implementar mais funções que as solicitadas. Da
+mesma forma, não é permitido utilizar outras classes, nem outros recursos/técnicas que aquelas
+desenvolvidas em sala de aula!
